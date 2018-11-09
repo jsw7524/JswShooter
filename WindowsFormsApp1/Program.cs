@@ -6,6 +6,24 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
+    
+    public class GameMgr
+    {
+        public DataStructure GameDataStructure { get; set; }
+        //public Timer GameTimer { get; set; }
+
+        public GameMgr()
+        {
+            GameDataStructure = new DataStructure();
+
+        }
+
+
+
+    }
+
+
+
     static class Program
     {
         /// <summary>
@@ -14,9 +32,16 @@ namespace WindowsFormsApp1
         [STAThread]
         static void Main()
         {
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            Timer GameTimer = new Timer();
+            GameTimer.Interval = 1000/30;
+            GameTimer.Start();
+
+            Application.Run(new Form1(new GameMgr(), GameTimer));
         }
     }
 }
