@@ -7,31 +7,34 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public class GameMgr
+    public static class GameMgr
     {
         public static DataStructure GameDataStructure { get; set; }
-        public Timer GameTimer { get; set; }
+        public static Timer GameTimer { get; set; }
 
         public static List<GameObject> GameObjects { get; set; }
 
         public static DataStructure.KD_Node KdRoot { get; set; }
 
-        public GameMgr(Timer t)
+        public static Dictionary<Point,GameObject> GameObjectDictionary { get; set; }
+
+        public static void SetGameMgr(Timer t)
         {
             GameDataStructure = new DataStructure();
             GameTimer = t;
             GameObjects = new List<GameObject>();
             GameTimer.Tick += new EventHandler(RunGame);
-
+            GameObjectDictionary = new Dictionary<Point, GameObject>();
             InitGame();
         }
 
-        public void InitGame()
+        public static void InitGame()
         {
             MyShip myShip = new MyShip(300, 300);
+            EnemyShip enemyShip1 = new EnemyShip(300,100);
         }
 
-        public void RunGame(Object myObject, EventArgs myEventArgs)
+        public static void RunGame(Object myObject, EventArgs myEventArgs)
         {
             GameDataStructure.Points.Clear();
 

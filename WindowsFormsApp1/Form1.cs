@@ -12,14 +12,14 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        GameMgr gameMgr;
+        //GameMgr gameMgr;
         Timer FormTimer;
         SolidBrush blueBrush;
         private MyShip myShip;
-        public Form1(GameMgr g, Timer t)
+        public Form1( Timer t)
         {
             blueBrush = new SolidBrush(Color.Blue);
-            gameMgr = g;
+            //gameMgr = g;
             FormTimer = t;
             FormTimer.Tick+= new EventHandler(UpdateScreen);
             myShip = GameMgr.GameObjects.Where(a => a.ID == 0).FirstOrDefault() as MyShip;
@@ -68,6 +68,11 @@ namespace WindowsFormsApp1
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             myShip.Instructions.Enqueue(e.KeyData);
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            //myShip.Instructions.Clear();
         }
     }
 }

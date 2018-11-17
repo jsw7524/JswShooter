@@ -24,10 +24,10 @@ namespace WindowsFormsApp1
             Application.SetCompatibleTextRenderingDefault(false);
 
             Timer GameTimer = new Timer();
-            GameTimer.Interval = 1000/30;
+            GameTimer.Interval = 1000/15;
             GameTimer.Start();
-
-            Application.Run(new Form1(new GameMgr(GameTimer), GameTimer));
+            GameMgr.SetGameMgr(GameTimer);
+            Application.Run(new Form1( GameTimer));
         }
     }
 }

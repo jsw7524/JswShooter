@@ -12,6 +12,7 @@ namespace WindowsFormsApp1
         protected int HP { get; set; }
         protected int CoolDownTime { get; set; }
         protected int CoolDown { get; set; }
+        protected string ShipWeapon { get; set; }
         public virtual void Move(int x, int y)
         {
 

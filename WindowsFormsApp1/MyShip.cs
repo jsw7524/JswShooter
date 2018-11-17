@@ -21,8 +21,18 @@ namespace WindowsFormsApp1
             CoolDownTime = 30;
             CoolDown = 0;
             Contour = new List<Point>();
+            Contour.Add(new Point(this.X, this.Y));
+            Contour.Add(new Point(this.X, this.Y + this.Height));
+            Contour.Add(new Point(this.X + this.Width, this.Y));
+            Contour.Add(new Point(this.X + this.Width, this.Y + this.Height));
             Instructions = new Queue<Keys>();
             SetGraph();
+            foreach (var p in this.Contour)
+            {
+                GameMgr.GameObjectDictionary.Add(p, this);
+            }
+
+
         }
 
         public Queue<Keys> Instructions;
@@ -33,7 +43,7 @@ namespace WindowsFormsApp1
         public int BottomRightY { get; set; }
         public List<Point> Contour { get; set; }
 
-        public string ShipWeapon { get; set; }
+        
         //public override bool CheckCoolDown()
         //{
         //    if (0 >= CoolDown)
@@ -96,15 +106,23 @@ namespace WindowsFormsApp1
             TopLeftY = this.Y;
             BottomRightX = this.X + this.Width;
             BottomRightY = this.Y + this.Height;
-            Contour.Add(new Point(this.X, this.Y));
-            Contour.Add(new Point(this.X, this.Y + this.Height));
-            Contour.Add(new Point(this.X + this.Width, this.Y));
-            Contour.Add(new Point(this.X + this.Width, this.Y + this.Height));
+            //////////////
+            Contour[0].X = this.X;
+            Contour[0].Y = this.Y;
+            Contour[1].X = this.X;
+            Contour[1].Y = this.Y + this.Height;
+            Contour[2].X = this.X + this.Width;
+            Contour[2].Y = this.Y;
+            Contour[3].X = this.X + this.Width;
+            Contour[3].Y = this.Y + this.Height;
+            ///////////////
+
         }
 
         public List<GameObject> IsHit()
         {
-            //GameMgr.Search_KD_Tree(root, 150, 150, 350, 350);
+            //var ps = GameMgr.GameDataStructure.Search_KD_Tree(GameMgr.KdRoot, 150, 150, 350, 350);
+
             return null;
         }
     }

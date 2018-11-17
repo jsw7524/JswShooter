@@ -21,11 +21,28 @@ namespace WindowsFormsApp1
             ID = number;
             number++;
             GameMgr.GameObjects.Add(this);
+
+
+
+
         }
 
         public virtual void DoSomething()
         {
 
+        }
+
+        public void DeleteThis()
+        {
+            if (this is IDrawable)
+            {
+                var g = this as IDrawable;
+                foreach (var p in g.Contour)
+                {
+                    GameMgr.GameObjectDictionary.Remove(p);
+                }
+            }
+            GameMgr.GameObjects.Remove(this);
         }
 
     }

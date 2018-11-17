@@ -6,64 +6,72 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
-    public class Bullet : Weapon, IMovable, IDrawable
+    class EnemyShip : Ship, IDrawable
     {
-        public int Speed { get; set; }
         public int TopLeftX { get; set; }
         public int TopLeftY { get; set; }
         public int BottomRightX { get; set; }
         public int BottomRightY { get; set; }
         public List<Point> Contour { get; set; }
 
-        //public Bullet()
-        //{
-        //    Contour = new List<Point>();
-        //    Contour.Add(new Point(this.X, this.Y));
-        //    Contour.Add(new Point(this.X, this.Y + this.Height));
-        //    Contour.Add(new Point(this.X + this.Width, this.Y));
-        //    Contour.Add(new Point(this.X + this.Width, this.Y + this.Height));
-        //    foreach (var p in this.Contour)
-        //    {
-        //        GameMgr.GameObjectDictionary.Add(p, this);
-        //    }
-        //}
-
-        public Bullet(int x, int y)
+        public EnemyShip(int x, int y)
         {
             this.X = x;
             this.Y = y;
-            this.Width = 5;
-            this.Height = 5;
-            this.Speed = 5;
+            this.Width = 10;
+            this.Height = 10;
+            this.Speed = 3;
+            this.HP = 3;
+            ShipWeapon = "Bullet";
+            CoolDownTime = 30;
+            CoolDown = 0;
             Contour = new List<Point>();
             Contour.Add(new Point(this.X, this.Y));
             Contour.Add(new Point(this.X, this.Y + this.Height));
             Contour.Add(new Point(this.X + this.Width, this.Y));
             Contour.Add(new Point(this.X + this.Width, this.Y + this.Height));
+            SetGraph();
             foreach (var p in this.Contour)
             {
                 GameMgr.GameObjectDictionary.Add(p, this);
             }
         }
 
-
-
-        public void Move(int x, int y)
+        public List<GameObject> IsHit()
         {
-            this.X += 0;
-            this.Y += y * Speed;
-            SetGraph();
+            var ps = GameMgr.GameDataStructure.Search_KD_Tree(GameMgr.KdRoot, TopLeftX, TopLeftY, BottomRightX, BottomRightY);
 
-            if (this.X < 0 || this.X > 1080)
+            bool isDeleted = false;
+
+            foreach (var p in ps)
             {
-                DeleteThis();
+                var gobj = GameMgr.GameObjectDictionary[p];
+                if (gobj == this)
+                {
+                    continue;
+                }
+                else if (gobj is Bullet)
+                {
+                    var bullet = gobj as Bullet;
+                    HP-= 1;
+                    
+                }
             }
-            if (this.Y < 0 || this.Y > 1920)
-            {
-                DeleteThis();
-            }
+
+            return null;
         }
+        public override void DoSomething()
+        {
+            base.DoSomething();
+            this.Move(0, -1);
+            IsHit();
 
+            if (HP <= 0)
+            {
+                DeleteThis();
+            }
+
+        }
         public void SetGraph()
         {
             TopLeftX = this.X;
@@ -80,28 +88,6 @@ namespace WindowsFormsApp1
             Contour[3].X = this.X + this.Width;
             Contour[3].Y = this.Y + this.Height;
             ///////////////
-
-        }
-
-        public override void DoSomething()
-        {
-            base.DoSomething();
-            this.Move(0, -1);
-            IsHit();
-        }
-
-        public List<GameObject> IsHit()
-        {
-            //var ps = GameMgr.GameDataStructure.Search_KD_Tree(GameMgr.KdRoot, TopLeftX, TopLeftY, BottomRightX, BottomRightY);
-
-            //foreach (var p in ps)
-            //{
-            //    var gobj=GameMgr.GameObjectDictionary[p];
-            //    int i = 1;
-
-            //}
-
-            return null;
         }
     }
 }
