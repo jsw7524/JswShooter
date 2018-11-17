@@ -7,20 +7,6 @@ using System.Windows.Forms;
 namespace WindowsFormsApp1
 {
     
-    public class GameMgr
-    {
-        public DataStructure GameDataStructure { get; set; }
-        //public Timer GameTimer { get; set; }
-
-        public GameMgr()
-        {
-            GameDataStructure = new DataStructure();
-
-        }
-
-
-
-    }
 
 
 
@@ -41,7 +27,7 @@ namespace WindowsFormsApp1
             GameTimer.Interval = 1000/30;
             GameTimer.Start();
 
-            Application.Run(new Form1(new GameMgr(), GameTimer));
+            Application.Run(new Form1(new GameMgr(GameTimer), GameTimer));
         }
     }
 }

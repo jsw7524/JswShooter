@@ -14,11 +14,16 @@ namespace WindowsFormsApp1
     {
         GameMgr gameMgr;
         Timer FormTimer;
+        SolidBrush blueBrush;
+        private MyShip myShip;
         public Form1(GameMgr g, Timer t)
         {
+            blueBrush = new SolidBrush(Color.Blue);
             gameMgr = g;
             FormTimer = t;
             FormTimer.Tick+= new EventHandler(UpdateScreen);
+            myShip = GameMgr.GameObjects.Where(a => a.ID == 0).FirstOrDefault() as MyShip;
+            this.DoubleBuffered = true;
             InitializeComponent();
         }
         public void UpdateScreen(Object myObject, EventArgs myEventArgs)
@@ -40,10 +45,15 @@ namespace WindowsFormsApp1
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            SolidBrush blueBrush = new SolidBrush(Color.Blue);
-            foreach (var p in gameMgr.GameDataStructure.Points)
+            
+            foreach (var gobj in GameMgr.GameObjects)
             {
-                e.Graphics.FillRectangle(blueBrush, p.X, p.Y, 10, 10);
+                if (gobj is IDrawable)
+                {
+                    var g = gobj as IDrawable;
+                    e.Graphics.FillRectangle(blueBrush, g.TopLeftX, g.TopLeftY, g.BottomRightX- g.TopLeftX, g.BottomRightY- g.TopLeftY);
+                }
+                e.Graphics.FillRectangle(blueBrush, 10, 10, 10, 10);
             }
 
             
@@ -52,7 +62,12 @@ namespace WindowsFormsApp1
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            gameMgr.GameDataStructure.Points.Add(new Point(e.X, e.Y));
+            //gameMgr.GameDataStructure.Points.Add(new Point(e.X, e.Y));
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            myShip.Instructions.Enqueue(e.KeyData);
         }
     }
 }
