@@ -14,6 +14,16 @@ namespace WindowsFormsApp1
         public int BottomRightY { get; set; }
         public List<Point> Contour { get; set; }
 
+        private double phase = 0;
+
+        public override void Move(int x, int y)
+        {
+            this.X += Convert.ToInt32((Math.Cos(phase) * Speed));
+            phase += 0.1;
+            //this.Y += Math.Cos(phase) * Speed;
+            SetGraph();
+        }
+
         public EnemyShip(int x, int y)
         {
             this.X = x;
@@ -21,7 +31,7 @@ namespace WindowsFormsApp1
             this.Width = 10;
             this.Height = 10;
             this.Speed = 3;
-            this.HP = 3;
+            this.HP = 1;
             ShipWeapon = "Bullet";
             CoolDownTime = 30;
             CoolDown = 0;
@@ -54,7 +64,7 @@ namespace WindowsFormsApp1
                 {
                     var bullet = gobj as Bullet;
                     HP-= 1;
-                    
+                    bullet.HP = -1;
                 }
             }
 
@@ -63,13 +73,11 @@ namespace WindowsFormsApp1
         public override void DoSomething()
         {
             base.DoSomething();
-            this.Move(0, -1);
-            IsHit();
+            this.IsHit();
 
-            if (HP <= 0)
-            {
-                DeleteThis();
-            }
+            Move(0,0);
+
+
 
         }
         public void SetGraph()

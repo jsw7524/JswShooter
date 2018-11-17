@@ -18,7 +18,8 @@ namespace WindowsFormsApp1
             this.Height = 10;
             this.Speed = 3;
             ShipWeapon = "Bullet";
-            CoolDownTime = 30;
+            CoolDownTime = 3;
+            HP = 100;
             CoolDown = 0;
             Contour = new List<Point>();
             Contour.Add(new Point(this.X, this.Y));
@@ -80,6 +81,12 @@ namespace WindowsFormsApp1
             }
         }
 
+        public void SetXY(int x, int y)
+        {
+            this.X = x;
+            this.Y = y;
+            SetGraph();
+        }
         public override void Shoot()
         {
             if (CheckCoolDown())

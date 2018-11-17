@@ -10,10 +10,7 @@ namespace WindowsFormsApp1
     {
         protected int Damage { get; set; }
 
-        public override void DoSomething()
-        {
 
-        }
 
     }
 }

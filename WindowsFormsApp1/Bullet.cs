@@ -8,25 +8,11 @@ namespace WindowsFormsApp1
 {
     public class Bullet : Weapon, IMovable, IDrawable
     {
-        public int Speed { get; set; }
         public int TopLeftX { get; set; }
         public int TopLeftY { get; set; }
         public int BottomRightX { get; set; }
         public int BottomRightY { get; set; }
         public List<Point> Contour { get; set; }
-
-        //public Bullet()
-        //{
-        //    Contour = new List<Point>();
-        //    Contour.Add(new Point(this.X, this.Y));
-        //    Contour.Add(new Point(this.X, this.Y + this.Height));
-        //    Contour.Add(new Point(this.X + this.Width, this.Y));
-        //    Contour.Add(new Point(this.X + this.Width, this.Y + this.Height));
-        //    foreach (var p in this.Contour)
-        //    {
-        //        GameMgr.GameObjectDictionary.Add(p, this);
-        //    }
-        //}
 
         public Bullet(int x, int y)
         {
@@ -34,7 +20,8 @@ namespace WindowsFormsApp1
             this.Y = y;
             this.Width = 5;
             this.Height = 5;
-            this.Speed = 5;
+            this.Speed = 4;
+            HP = 1;
             Contour = new List<Point>();
             Contour.Add(new Point(this.X, this.Y));
             Contour.Add(new Point(this.X, this.Y + this.Height));
@@ -53,15 +40,6 @@ namespace WindowsFormsApp1
             this.X += 0;
             this.Y += y * Speed;
             SetGraph();
-
-            if (this.X < 0 || this.X > 1080)
-            {
-                DeleteThis();
-            }
-            if (this.Y < 0 || this.Y > 1920)
-            {
-                DeleteThis();
-            }
         }
 
         public void SetGraph()
@@ -70,6 +48,7 @@ namespace WindowsFormsApp1
             TopLeftY = this.Y;
             BottomRightX = this.X + this.Width;
             BottomRightY = this.Y + this.Height;
+            
             //////////////
             Contour[0].X = this.X;
             Contour[0].Y = this.Y;
@@ -92,14 +71,7 @@ namespace WindowsFormsApp1
 
         public List<GameObject> IsHit()
         {
-            //var ps = GameMgr.GameDataStructure.Search_KD_Tree(GameMgr.KdRoot, TopLeftX, TopLeftY, BottomRightX, BottomRightY);
 
-            //foreach (var p in ps)
-            //{
-            //    var gobj=GameMgr.GameObjectDictionary[p];
-            //    int i = 1;
-
-            //}
 
             return null;
         }

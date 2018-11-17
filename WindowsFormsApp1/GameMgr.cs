@@ -31,11 +31,26 @@ namespace WindowsFormsApp1
         public static void InitGame()
         {
             MyShip myShip = new MyShip(300, 300);
-            EnemyShip enemyShip1 = new EnemyShip(300,100);
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    EnemyShip enemyShip1 = new EnemyShip(i * 30 + 300, j*30+100);
+                }
+                   
+            }
+
         }
 
         public static void RunGame(Object myObject, EventArgs myEventArgs)
         {
+            var backup0 = GameObjects.ToList();
+            foreach (var gobj in backup0)
+            {
+                gobj.IsDeleted();
+            }
+
+
             GameDataStructure.Points.Clear();
 
             var backup1 = GameObjects.ToList();

@@ -53,7 +53,7 @@ namespace WindowsFormsApp1
                     var g = gobj as IDrawable;
                     e.Graphics.FillRectangle(blueBrush, g.TopLeftX, g.TopLeftY, g.BottomRightX- g.TopLeftX, g.BottomRightY- g.TopLeftY);
                 }
-                e.Graphics.FillRectangle(blueBrush, 10, 10, 10, 10);
+                //e.Graphics.FillRectangle(blueBrush, 10, 10, 10, 10);
             }
 
             
@@ -62,17 +62,22 @@ namespace WindowsFormsApp1
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            //gameMgr.GameDataStructure.Points.Add(new Point(e.X, e.Y));
+            myShip.Shoot();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            myShip.Instructions.Enqueue(e.KeyData);
+            //myShip.Instructions.Enqueue(e.KeyData);
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-            //myShip.Instructions.Clear();
+
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            myShip.SetXY(e.X,e.Y);
         }
     }
 }

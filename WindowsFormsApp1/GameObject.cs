@@ -10,7 +10,8 @@ namespace WindowsFormsApp1
     {
         public int ID { get; }
         static int number;
-
+        public int HP { get; set; }
+        public int Speed { get; set; }
         protected int X { get; set; }
         protected int Y { get; set; }
         protected int Height { get; set; }
@@ -21,28 +22,29 @@ namespace WindowsFormsApp1
             ID = number;
             number++;
             GameMgr.GameObjects.Add(this);
-
-
-
-
         }
 
         public virtual void DoSomething()
         {
 
+
         }
 
-        public void DeleteThis()
+        public void IsDeleted()
         {
-            if (this is IDrawable)
+            if (HP <= 0)
             {
-                var g = this as IDrawable;
-                foreach (var p in g.Contour)
+                if (this is IDrawable)
                 {
-                    GameMgr.GameObjectDictionary.Remove(p);
+                    var g = this as IDrawable;
+                    foreach (var p in g.Contour)
+                    {
+                        GameMgr.GameObjectDictionary.Remove(p);
+                    }
                 }
+                GameMgr.GameObjects.Remove(this);
             }
-            GameMgr.GameObjects.Remove(this);
+
         }
 
     }

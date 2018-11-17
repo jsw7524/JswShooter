@@ -8,8 +8,8 @@ namespace WindowsFormsApp1
 {
     abstract class Ship : GameObject, IMovable, IShootable
     {
-        public int Speed { get; set; }
-        protected int HP { get; set; }
+        
+
         protected int CoolDownTime { get; set; }
         protected int CoolDown { get; set; }
         protected string ShipWeapon { get; set; }
@@ -34,6 +34,7 @@ namespace WindowsFormsApp1
 
         public override void DoSomething()
         {
+            base.DoSomething();
             CoolDown--;
         }
     }
