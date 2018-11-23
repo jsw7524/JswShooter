@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace WindowsFormsApp1
 {
@@ -18,8 +20,12 @@ namespace WindowsFormsApp1
 
         public static Dictionary<Point,GameObject> GameObjectDictionary { get; set; }
 
+        public static int OffSetX { get; set; }
+        public static int OffSetY { get; set; }
         public static void SetGameMgr(Timer t)
         {
+            OffSetX = 0;
+            OffSetY = 0;
             GameDataStructure = new DataStructure();
             GameTimer = t;
             GameObjects = new List<GameObject>();
@@ -28,8 +34,26 @@ namespace WindowsFormsApp1
             InitGame();
         }
 
+
+        class PlotEnemy
+        {
+            public int time;
+            public string enemyType;
+            public int x;
+            public int y;
+        }
+        class Plot
+        {
+            public List<PlotEnemy> Enemies;
+        }
+
+        static Plot GamePlot = new Plot();
+
         public static void InitGame()
         {
+            GamePlot = JsonConvert.DeserializeObject<Plot>(File.ReadAllText("PLOT.txt"));
+            GamePlot.Enemies=GamePlot.Enemies.OrderBy(t=>t.time).ToList();
+
             MyShip myShip = new MyShip(300, 300);
             for (int i = 0; i < 10; i++)
             {
@@ -51,13 +75,27 @@ namespace WindowsFormsApp1
 
         public static void RunGame(Object myObject, EventArgs myEventArgs)
         {
+            OffSetX++;
+            OffSetY++;
+
+            foreach (var gp in GamePlot.Enemies)
+            {
+                if (gp.time == OffSetY)
+                {
+                    switch (gp.enemyType)
+                    {
+                        case "EnemyShip":
+                            GameObjects.Add(new EnemyShip(gp.x,gp.y));
+                            break;
+                    }
+                }
+            }
+
             var backup0 = GameObjects.ToList();
             foreach (var gobj in backup0)
             {
                 gobj.IsDeleted();
             }
-
-
             GameDataStructure.Points.Clear();
 
             var backup1 = GameObjects.ToList();

@@ -13,6 +13,7 @@ namespace WindowsFormsApp1
         public override void Move(int x, int y)
         {
             this.X += Convert.ToInt32((Math.Cos(phase) * Speed));
+            this.Y += 1;
             phase += 0.1;
             //this.Y += Math.Cos(phase) * Speed;
             SetGraph();
@@ -43,7 +44,7 @@ namespace WindowsFormsApp1
                 switch (ShipWeapon)
                 {
                     case "Bullet":
-                        new Bullet(this.X, this.Y+20, (myship.X-this.X)/100, (myship.Y-this.Y)/100);
+                        new Bullet(this.X, this.Y+20, (myship.X-this.X)>0?1:-1, (myship.Y-this.Y>0)?1:-1);
                         break;
                 }
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,19 +11,15 @@ namespace WindowsFormsApp1
     {
         
 
-        protected int CoolDownTime { get; set; }
+        //protected int CoolDownTime { get; set; }
         protected int CoolDown { get; set; }
         protected string ShipWeapon { get; set; }
-        //public int TopLeftX { get; set ; }
-        //public int TopLeftY { get; set ; }
-        //public int BottomRightX { get; set ; }
-        //public int BottomRightY { get ; set ; }
-        //public List<Point> Contour { get ; set ; }=new List<Point>();
+
 
         public Ship(int x ,int y,int width ,int height,int speed, int coolDownTime,int hp ,string shipWeapon):base(x,y,width,height,speed,hp)
         {
             ShipWeapon = shipWeapon;
-            CoolDownTime = coolDownTime;
+            //CoolDownTime = coolDownTime;
 
             CoolDown = 0;
         }
@@ -36,11 +33,14 @@ namespace WindowsFormsApp1
         {
 
         }
+
+
         public virtual bool CheckCoolDown()
         {
             if (0 >= CoolDown)
             {
-                CoolDown = CoolDownTime;
+                PropertyInfo myPropInfo = Type.GetType("WindowsFormsApp1.Bullet").GetProperty("CoolDownTime");
+                CoolDown = Convert.ToInt32(myPropInfo.GetValue(this,null)); ;
                 return true;
             }
             return false;

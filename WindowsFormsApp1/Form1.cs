@@ -12,12 +12,15 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
+        private StringBuilder sb;
         //GameMgr gameMgr;
         Timer FormTimer;
         SolidBrush blueBrush;
         private MyShip myShip;
         public Form1(Timer t)
         {
+            sb = new StringBuilder();
+            
             blueBrush = new SolidBrush(Color.Blue);
             //gameMgr = g;
             FormTimer = t;
@@ -33,6 +36,11 @@ namespace WindowsFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Cursor.Hide();
+            this.WindowState = FormWindowState.Maximized;
+            this.MinimumSize = this.Size;
+            this.MaximumSize = this.Size;
+            
 
         }
 
@@ -45,34 +53,38 @@ namespace WindowsFormsApp1
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-
+            MyShip myShip =GameMgr.GameObjects.FirstOrDefault() as MyShip;
+            this.label1.Text = "HP:" + myShip.HP + " Frame:" + GameMgr.OffSetY;
             foreach (var gobj in GameMgr.GameObjects)
             {
                 if (gobj is VisibleGameObject)
                 {
+                    Brush brush = Brushes.White;
+                    var g = gobj as VisibleGameObject;
 
                     if (gobj is EnemyShip)
                     {
-                        var g = gobj as EnemyShip;
-                        e.Graphics.FillRectangle(Brushes.Red, g.TopLeftX, g.TopLeftY, g.BottomRightX - g.TopLeftX, g.BottomRightY - g.TopLeftY);
-                    }
-                    else if (gobj is Bullet)
-                    {
-                        var g = gobj as Bullet;
-                        e.Graphics.FillRectangle(Brushes.Gold, g.TopLeftX, g.TopLeftY, g.BottomRightX - g.TopLeftX, g.BottomRightY - g.TopLeftY);
+                        brush = Brushes.Red;
                     }
                     else if (gobj is MyShip)
                     {
-                        var g = gobj as MyShip;
-                        e.Graphics.FillRectangle(Brushes.Blue, g.TopLeftX, g.TopLeftY, g.BottomRightX - g.TopLeftX, g.BottomRightY - g.TopLeftY);
+                        brush = Brushes.Blue;            
+                    }
+                    else if (gobj is Bullet)
+                    {
+                        brush = Brushes.Gold;
                     }
                     else if (gobj is Brick)
                     {
-                        var g = gobj as Brick;
-                        e.Graphics.FillRectangle(Brushes.Black, g.TopLeftX, g.TopLeftY, g.BottomRightX - g.TopLeftX, g.BottomRightY - g.TopLeftY);
+                        brush = Brushes.Black;
                     }
+                    else if (gobj is Laser)
+                    {
+                        brush = Brushes.Aqua;
+                    }
+                    e.Graphics.FillRectangle(brush, g.TopLeftX, g.TopLeftY, g.BottomRightX - g.TopLeftX,g.BottomRightY - g.TopLeftY);
                 }
-                //e.Graphics.FillRectangle(blueBrush, 10, 10, 10, 10);
+
             }
 
 

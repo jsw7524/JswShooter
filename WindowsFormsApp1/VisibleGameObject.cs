@@ -26,12 +26,12 @@ namespace WindowsFormsApp1
             Contour.Add(new Point(this.X + this.Width, this.Y));
             Contour.Add(new Point(this.X + this.Width, this.Y + this.Height));
             /////////////
-            //Contour.Add(new Point(this.X, this.Y + this.Height/2));
-            //Contour.Add(new Point(this.X + this.Width / 2, this.Y));
-            //Contour.Add(new Point(this.X + this.Width / 2, this.Y + this.Height / 2));
+            Contour.Add(new Point(this.X, this.Y + this.Height / 2));
+            Contour.Add(new Point(this.X + this.Width / 2, this.Y));
+            Contour.Add(new Point(this.X + this.Width / 2, this.Y + this.Height / 2));
             ////////////////
-            //Contour.Add(new Point(this.X + this.Width, this.Y + this.Height / 2));
-            //Contour.Add(new Point(this.X + this.Width / 2, this.Y + this.Height));
+            Contour.Add(new Point(this.X + this.Width, this.Y + this.Height / 2));
+            Contour.Add(new Point(this.X + this.Width / 2, this.Y + this.Height));
             //////////
             SetGraph();
             foreach (var p in this.Contour)
@@ -63,6 +63,21 @@ namespace WindowsFormsApp1
             Contour[3].X = this.X + this.Width;
             Contour[3].Y = this.Y + this.Height;
             ///////////////
+            Contour[4].X = this.X;
+            Contour[4].Y = this.Y + this.Height / 2;
+
+            Contour[5].X = this.X + this.Width / 2;
+            Contour[5].Y = this.Y;
+
+            Contour[6].X = this.X + this.Width / 2;
+            Contour[6].Y = this.Y + this.Height / 2;
+            //////////
+            Contour[7].X = this.X + this.Width;
+            Contour[7].Y = this.Y + this.Height / 2;
+
+            Contour[8].X = this.X + this.Width / 2;
+            Contour[8].Y = this.Y + this.Height;
+            //    /////////
         }
 
         public virtual List<GameObject> IsHit()
@@ -91,10 +106,16 @@ namespace WindowsFormsApp1
 
                     gobj.HP -= 1;
                 }
+                else if (gobj is EnemyShip)
+                {
+                    var enemyShip = gobj as EnemyShip;
+                    HP -= 1;
+                    gobj.HP -= 1;
+                }
             }
 
             return null;
         }
     }
-    
+
 }

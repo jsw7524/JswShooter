@@ -11,7 +11,7 @@ namespace WindowsFormsApp1
     class MyShip : Ship
     {
 
-        public MyShip(int x, int y) : base(x,y,10,10,3,3,1000, "Bullet")
+        public MyShip(int x, int y) : base(x,y,10,10,3,3,100, "Laser")
         {
             
 
@@ -36,12 +36,16 @@ namespace WindowsFormsApp1
         }
         public override void Shoot()
         {
+
             if (CheckCoolDown())
             {
                 switch (ShipWeapon)
                 {
                     case "Bullet":
                         new Bullet(this.X, this.Y - 10,0,-1);
+                        break;
+                    case "Laser":
+                        new Laser(this.X, this.Y - 10, 0, -1);
                         break;
                 }
             }
