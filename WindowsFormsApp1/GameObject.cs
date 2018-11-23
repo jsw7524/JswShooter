@@ -11,19 +11,19 @@ namespace WindowsFormsApp1
         public int ID { get; }
         static int number;
         public int HP { get; set; }
-        public int Speed { get; set; }
-        public int X { get; set; }
-        public int Y { get; set; }
-        protected int Height { get; set; }
-        protected int Width { get; set; }
+        //public int Speed { get; set; }
+        //public int X { get; set; }
+        //public int Y { get; set; }
+        //protected int Height { get; set; }
+        //protected int Width { get; set; }
 
-        public GameObject(int x, int y, int width, int height, int speed,int hp)
+        public GameObject(int hp)
         {
-            this.X = x;
-            this.Y = y;
-            this.Width = width;
-            this.Height = height;
-            this.Speed = speed;
+            //this.X = x;
+            //this.Y = y;
+            //this.Width = width;
+            //this.Height = height;
+            //this.Speed = speed;
             this.HP = hp;
             ID = number;
             number++;
@@ -40,9 +40,9 @@ namespace WindowsFormsApp1
         {
             if (HP <= 0)
             {
-                if (this is IDrawable)
+                if (this is VisibleGameObject)
                 {
-                    var g = this as IDrawable;
+                    var g = this as VisibleGameObject;
                     foreach (var p in g.Contour)
                     {
                         GameMgr.GameObjectDictionary.Remove(p);

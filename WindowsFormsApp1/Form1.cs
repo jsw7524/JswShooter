@@ -48,7 +48,7 @@ namespace WindowsFormsApp1
 
             foreach (var gobj in GameMgr.GameObjects)
             {
-                if (gobj is IDrawable)
+                if (gobj is VisibleGameObject)
                 {
 
                     if (gobj is EnemyShip)

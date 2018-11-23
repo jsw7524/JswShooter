@@ -63,9 +63,9 @@ namespace WindowsFormsApp1
             var backup1 = GameObjects.ToList();
             foreach (var gobj in backup1)
             {
-                if (gobj is IDrawable)
+                if (gobj is VisibleGameObject)
                 {
-                    var g = gobj as IDrawable;
+                    var g = gobj as VisibleGameObject;
                     GameDataStructure.Points.AddRange(g.Contour);
                 }
             }

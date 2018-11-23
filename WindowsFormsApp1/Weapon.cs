@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
-    public abstract class Weapon:GameObject
+    public abstract class Weapon:VisibleGameObject
     {
         protected int Damage { get; set; }
 
