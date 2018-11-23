@@ -36,8 +36,15 @@ namespace WindowsFormsApp1
                 for (int j = 0; j < 1; j++)
                 {
                     EnemyShip enemyShip1 = new EnemyShip(i * 30 + 300, j*30+100);
+                } 
+            }
+
+            for (int i = 0; i < 50; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    Brick brick = new Brick(i * 5 + 200, j * 5 + 200);
                 }
-                   
             }
 
         }

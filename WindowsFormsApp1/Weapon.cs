@@ -10,7 +10,10 @@ namespace WindowsFormsApp1
     {
         protected int Damage { get; set; }
 
-
+        public Weapon(int x, int y, int width, int height, int speed, int hp) : base(x, y, width, height, speed, hp)
+        {
+                
+        }
 
     }
 }

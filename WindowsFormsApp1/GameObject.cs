@@ -17,8 +17,14 @@ namespace WindowsFormsApp1
         protected int Height { get; set; }
         protected int Width { get; set; }
 
-        public GameObject()
+        public GameObject(int x, int y, int width, int height, int speed,int hp)
         {
+            this.X = x;
+            this.Y = y;
+            this.Width = width;
+            this.Height = height;
+            this.Speed = speed;
+            this.HP = hp;
             ID = number;
             number++;
             GameMgr.GameObjects.Add(this);

@@ -17,16 +17,11 @@ namespace WindowsFormsApp1
         public int Ax{ get; set; }
         public int Ay { get; set; }
 
-        public Bullet(int x, int y, int ax, int ay)
+        public Bullet(int x, int y, int ax, int ay) : base(x, y, 5, 5, 4, 1)
         {
-            this.X = x;
-            this.Y = y;
-            this.Width = 5;
-            this.Height = 5;
-            this.Speed = 4;
             Ax = ax;
             Ay = ay;
-            HP = 1;
+
             Contour = new List<Point>();
             Contour.Add(new Point(this.X, this.Y));
             Contour.Add(new Point(this.X, this.Y + this.Height));

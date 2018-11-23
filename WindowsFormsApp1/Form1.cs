@@ -66,7 +66,11 @@ namespace WindowsFormsApp1
                         var g = gobj as MyShip;
                         e.Graphics.FillRectangle(Brushes.Blue, g.TopLeftX, g.TopLeftY, g.BottomRightX - g.TopLeftX, g.BottomRightY - g.TopLeftY);
                     }
-
+                    else if (gobj is Brick)
+                    {
+                        var g = gobj as Brick;
+                        e.Graphics.FillRectangle(Brushes.Black, g.TopLeftX, g.TopLeftY, g.BottomRightX - g.TopLeftX, g.BottomRightY - g.TopLeftY);
+                    }
                 }
                 //e.Graphics.FillRectangle(blueBrush, 10, 10, 10, 10);
             }
