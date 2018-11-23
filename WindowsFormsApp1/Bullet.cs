@@ -14,13 +14,18 @@ namespace WindowsFormsApp1
         public int BottomRightY { get; set; }
         public List<Point> Contour { get; set; }
 
-        public Bullet(int x, int y)
+        public int Ax{ get; set; }
+        public int Ay { get; set; }
+
+        public Bullet(int x, int y, int ax, int ay)
         {
             this.X = x;
             this.Y = y;
             this.Width = 5;
             this.Height = 5;
             this.Speed = 4;
+            Ax = ax;
+            Ay = ay;
             HP = 1;
             Contour = new List<Point>();
             Contour.Add(new Point(this.X, this.Y));
@@ -37,7 +42,7 @@ namespace WindowsFormsApp1
 
         public void Move(int x, int y)
         {
-            this.X += 0;
+            this.X += x * Speed;
             this.Y += y * Speed;
             SetGraph();
         }
@@ -65,7 +70,7 @@ namespace WindowsFormsApp1
         public override void DoSomething()
         {
             base.DoSomething();
-            this.Move(0, -1);
+            this.Move(Ax, Ay);
             IsHit();
         }
 

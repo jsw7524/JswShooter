@@ -33,7 +33,7 @@ namespace WindowsFormsApp1
             MyShip myShip = new MyShip(300, 300);
             for (int i = 0; i < 10; i++)
             {
-                for (int j = 0; j < 10; j++)
+                for (int j = 0; j < 1; j++)
                 {
                     EnemyShip enemyShip1 = new EnemyShip(i * 30 + 300, j*30+100);
                 }

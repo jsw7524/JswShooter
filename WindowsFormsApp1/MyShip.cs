@@ -19,7 +19,7 @@ namespace WindowsFormsApp1
             this.Speed = 3;
             ShipWeapon = "Bullet";
             CoolDownTime = 3;
-            HP = 100;
+            HP = 10;
             CoolDown = 0;
             Contour = new List<Point>();
             Contour.Add(new Point(this.X, this.Y));
@@ -94,7 +94,7 @@ namespace WindowsFormsApp1
                 switch (ShipWeapon)
                 {
                     case "Bullet":
-                        new Bullet(this.X, this.Y - 10);
+                        new Bullet(this.X, this.Y - 10,0,-1);
                         break;
                 }
             }

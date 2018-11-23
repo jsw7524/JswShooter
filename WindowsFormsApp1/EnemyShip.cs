@@ -40,6 +40,7 @@ namespace WindowsFormsApp1
             Contour.Add(new Point(this.X, this.Y + this.Height));
             Contour.Add(new Point(this.X + this.Width, this.Y));
             Contour.Add(new Point(this.X + this.Width, this.Y + this.Height));
+            ShipWeapon = "Bullet";
             SetGraph();
             foreach (var p in this.Contour)
             {
@@ -66,6 +67,13 @@ namespace WindowsFormsApp1
                     HP-= 1;
                     bullet.HP = -1;
                 }
+                else if (gobj is MyShip)
+                {
+                    var myShip = gobj as MyShip;
+                    HP -= 1;
+
+                    gobj.HP -= 1;
+                }
             }
 
             return null;
@@ -77,9 +85,27 @@ namespace WindowsFormsApp1
 
             Move(0,0);
 
-
+            Shoot();
 
         }
+
+        public override void Shoot()
+        {
+            MyShip myship = GameMgr.GameObjects.FirstOrDefault() as MyShip;
+
+            if (CheckCoolDown())
+            {
+                switch (ShipWeapon)
+                {
+                    case "Bullet":
+                        new Bullet(this.X, this.Y+20, (myship.X-this.X)/100, (myship.Y-this.Y)/100);
+                        break;
+                }
+            }
+
+        }
+
+
         public void SetGraph()
         {
             TopLeftX = this.X;

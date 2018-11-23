@@ -12,8 +12,8 @@ namespace WindowsFormsApp1
         static int number;
         public int HP { get; set; }
         public int Speed { get; set; }
-        protected int X { get; set; }
-        protected int Y { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
         protected int Height { get; set; }
         protected int Width { get; set; }
 

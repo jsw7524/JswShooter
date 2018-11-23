@@ -16,12 +16,12 @@ namespace WindowsFormsApp1
         Timer FormTimer;
         SolidBrush blueBrush;
         private MyShip myShip;
-        public Form1( Timer t)
+        public Form1(Timer t)
         {
             blueBrush = new SolidBrush(Color.Blue);
             //gameMgr = g;
             FormTimer = t;
-            FormTimer.Tick+= new EventHandler(UpdateScreen);
+            FormTimer.Tick += new EventHandler(UpdateScreen);
             myShip = GameMgr.GameObjects.Where(a => a.ID == 0).FirstOrDefault() as MyShip;
             this.DoubleBuffered = true;
             InitializeComponent();
@@ -45,18 +45,33 @@ namespace WindowsFormsApp1
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            
+
             foreach (var gobj in GameMgr.GameObjects)
             {
                 if (gobj is IDrawable)
                 {
-                    var g = gobj as IDrawable;
-                    e.Graphics.FillRectangle(blueBrush, g.TopLeftX, g.TopLeftY, g.BottomRightX- g.TopLeftX, g.BottomRightY- g.TopLeftY);
+
+                    if (gobj is EnemyShip)
+                    {
+                        var g = gobj as EnemyShip;
+                        e.Graphics.FillRectangle(Brushes.Red, g.TopLeftX, g.TopLeftY, g.BottomRightX - g.TopLeftX, g.BottomRightY - g.TopLeftY);
+                    }
+                    else if (gobj is Bullet)
+                    {
+                        var g = gobj as Bullet;
+                        e.Graphics.FillRectangle(Brushes.Gold, g.TopLeftX, g.TopLeftY, g.BottomRightX - g.TopLeftX, g.BottomRightY - g.TopLeftY);
+                    }
+                    else if (gobj is MyShip)
+                    {
+                        var g = gobj as MyShip;
+                        e.Graphics.FillRectangle(Brushes.Blue, g.TopLeftX, g.TopLeftY, g.BottomRightX - g.TopLeftX, g.BottomRightY - g.TopLeftY);
+                    }
+
                 }
                 //e.Graphics.FillRectangle(blueBrush, 10, 10, 10, 10);
             }
 
-            
+
 
         }
 
@@ -77,7 +92,7 @@ namespace WindowsFormsApp1
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            myShip.SetXY(e.X,e.Y);
+            myShip.SetXY(e.X, e.Y);
         }
     }
 }
