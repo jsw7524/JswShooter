@@ -86,6 +86,10 @@ namespace WindowsFormsApp1
                     {
                         brush = Brushes.Goldenrod;
                     }
+                    else if (gobj is FriendShip)
+                    {
+                        brush = Brushes.DeepSkyBlue;
+                    }
                     else if (gobj is Laser)
                     {
                         //brush = Brushes.Aqua;

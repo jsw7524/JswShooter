@@ -9,9 +9,6 @@ namespace WindowsFormsApp1
 {
     abstract class Ship : VisibleGameObject, IShootable
     {
-        
-
-        //protected int CoolDownTime { get; set; }
         protected int CoolDown { get; set; }
         protected string ShipWeapon { get; set; }
 

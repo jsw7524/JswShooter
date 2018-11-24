@@ -18,7 +18,7 @@ namespace WindowsFormsApp1
 
         public static DataStructure.KD_Node KdRoot { get; set; }
 
-        public static Dictionary<Point,GameObject> GameObjectDictionary { get; set; }
+        public static Dictionary<Point, GameObject> GameObjectDictionary { get; set; }
 
         public static int OffSetX { get; set; }
         public static int OffSetY { get; set; }
@@ -52,15 +52,30 @@ namespace WindowsFormsApp1
         public static void InitGame()
         {
             GamePlot = JsonConvert.DeserializeObject<Plot>(File.ReadAllText("PLOT.txt"));
-            GamePlot.Enemies=GamePlot.Enemies.OrderBy(t=>t.time).ToList();
+            GamePlot.Enemies = GamePlot.Enemies.OrderBy(t => t.time).ToList();
 
             MyShip myShip = new MyShip(300, 300);
+            //new FriendShip(myShip.X , myShip.Y,0);
+            new FriendShip(myShip.X, myShip.Y, 0);
+            new FriendShip(myShip.X, myShip.Y, 1 * 2 * Math.PI / 12);
+            new FriendShip(myShip.X, myShip.Y, 2 * 2 * Math.PI / 12);
+            new FriendShip(myShip.X, myShip.Y, 3 * 2 * Math.PI / 12);
+            new FriendShip(myShip.X, myShip.Y, 4 * 2 * Math.PI / 12);
+            new FriendShip(myShip.X, myShip.Y, 5 * 2 * Math.PI / 12);
+
+            new FriendShip(myShip.X, myShip.Y, 6 * 2 * Math.PI / 12);
+            new FriendShip(myShip.X, myShip.Y, 7 * 2 * Math.PI / 12);
+            new FriendShip(myShip.X, myShip.Y, 8 * 2 * Math.PI / 12);
+            new FriendShip(myShip.X, myShip.Y, 9 * 2 * Math.PI / 12);
+            new FriendShip(myShip.X, myShip.Y, 10 * 2 * Math.PI / 12);
+            new FriendShip(myShip.X, myShip.Y, 11 * 2 * Math.PI / 12);
+
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 1; j++)
                 {
-                    EnemyShip enemyShip1 = new EnemyShip(i * 30 + 300, j*30+100);
-                } 
+                    EnemyShip enemyShip1 = new EnemyShip(i * 30 + 300, j * 30 + 100);
+                }
             }
 
             for (int i = 0; i < 50; i++)
@@ -113,7 +128,7 @@ namespace WindowsFormsApp1
                     GameDataStructure.Points.AddRange(g.Contour);
                 }
             }
-            KdRoot=GameDataStructure.Make_KD_Tree(GameDataStructure.Points, 0, 0, 1920, 1080, DataStructure.Axis.X);
+            KdRoot = GameDataStructure.Make_KD_Tree(GameDataStructure.Points, 0, 0, 1920, 1080, DataStructure.Axis.X);
 
             var backup2 = GameObjects.ToList();
             foreach (var gobj in backup2)

@@ -63,6 +63,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FriendShip.cs" />
     <Compile Include="GameMgr.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="IMovable.cs" />
