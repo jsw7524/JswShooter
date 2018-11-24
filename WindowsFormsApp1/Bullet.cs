@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
-    public class Bullet : Weapon, IMovable
+    public class Bullet : Weapon
     {
 
         public int Ax{ get; set; }
         public int Ay { get; set; }
-        static public int CoolDownTime { get; set; } = 5;
+        static public int CoolDownTime { get; set; } = 3;
         public Bullet(int x, int y, int ax, int ay) : base(x, y, 5, 5, 4, 1, 3)
         {
             Ax = ax;

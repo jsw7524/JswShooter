@@ -50,7 +50,7 @@ namespace WindowsFormsApp1
             int i = 1;
 
         }
-
+        Pen penAqua = new Pen(Color.Aqua, 5);
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             MyShip myShip =GameMgr.GameObjects.FirstOrDefault() as MyShip;
@@ -78,9 +78,20 @@ namespace WindowsFormsApp1
                     {
                         brush = Brushes.Black;
                     }
+                    else if (gobj is FirstAidKit)
+                    {
+                        brush = Brushes.LimeGreen;
+                    }
+                    else if (gobj is PowerUpBullet)
+                    {
+                        brush = Brushes.Goldenrod;
+                    }
                     else if (gobj is Laser)
                     {
-                        brush = Brushes.Aqua;
+                        //brush = Brushes.Aqua;
+                        
+                        e.Graphics.DrawLine(penAqua, g.X, g.Y, g.X, g.BottomRightY);
+                        continue;
                     }
                     e.Graphics.FillRectangle(brush, g.TopLeftX, g.TopLeftY, g.BottomRightX - g.TopLeftX,g.BottomRightY - g.TopLeftY);
                 }

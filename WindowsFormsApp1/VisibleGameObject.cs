@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
-    public class VisibleGameObject : GameObject
+    public class VisibleGameObject : GameObject, IMovable
     {
         public int Speed { get; set; }
         public int X { get; set; }
@@ -21,17 +21,17 @@ namespace WindowsFormsApp1
             this.Height = height;
             this.Speed = speed;
 
-            Contour.Add(new Point(this.X, this.Y));
-            Contour.Add(new Point(this.X, this.Y + this.Height));
-            Contour.Add(new Point(this.X + this.Width, this.Y));
-            Contour.Add(new Point(this.X + this.Width, this.Y + this.Height));
-            /////////////
-            Contour.Add(new Point(this.X, this.Y + this.Height / 2));
-            Contour.Add(new Point(this.X + this.Width / 2, this.Y));
-            Contour.Add(new Point(this.X + this.Width / 2, this.Y + this.Height / 2));
-            ////////////////
-            Contour.Add(new Point(this.X + this.Width, this.Y + this.Height / 2));
-            Contour.Add(new Point(this.X + this.Width / 2, this.Y + this.Height));
+            //Contour.Add(new Point(this.X, this.Y));
+            //Contour.Add(new Point(this.X, this.Y + this.Height));
+            //Contour.Add(new Point(this.X + this.Width, this.Y));
+            //Contour.Add(new Point(this.X + this.Width, this.Y + this.Height));
+            ///////////////
+            //Contour.Add(new Point(this.X, this.Y + this.Height / 2));
+            //Contour.Add(new Point(this.X + this.Width / 2, this.Y));
+            //Contour.Add(new Point(this.X + this.Width / 2, this.Y + this.Height / 2));
+            //////////////////
+            //Contour.Add(new Point(this.X + this.Width, this.Y + this.Height / 2));
+            //Contour.Add(new Point(this.X + this.Width / 2, this.Y + this.Height));
             //////////
             SetGraph();
             foreach (var p in this.Contour)
@@ -53,30 +53,56 @@ namespace WindowsFormsApp1
             TopLeftY = this.Y;
             BottomRightX = this.X + this.Width;
             BottomRightY = this.Y + this.Height;
-            //////////////
-            Contour[0].X = this.X;
-            Contour[0].Y = this.Y;
-            Contour[1].X = this.X;
-            Contour[1].Y = this.Y + this.Height;
-            Contour[2].X = this.X + this.Width;
-            Contour[2].Y = this.Y;
-            Contour[3].X = this.X + this.Width;
-            Contour[3].Y = this.Y + this.Height;
-            ///////////////
-            Contour[4].X = this.X;
-            Contour[4].Y = this.Y + this.Height / 2;
 
-            Contour[5].X = this.X + this.Width / 2;
-            Contour[5].Y = this.Y;
+            if (0 == Contour.Count)
+            {
+                for (int tx = TopLeftX; tx <= BottomRightX; tx++)
+                {
+                    for (int ty = TopLeftY; ty <= BottomRightY; ty++)
+                    {
+                        Contour.Add(new Point(tx, ty));
+                    }
+                }
+            }
+            else
+            {
+                int ti = 0;
+                for (int tx = TopLeftX; tx <= BottomRightX; tx++)
+                {
+                    for (int ty = TopLeftY; ty <= BottomRightY; ty++)
+                    {
+                        Contour[ti].X = tx;
+                        Contour[ti].Y = ty;
+                        ti++;
+                    }
+                }
+            }
 
-            Contour[6].X = this.X + this.Width / 2;
-            Contour[6].Y = this.Y + this.Height / 2;
-            //////////
-            Contour[7].X = this.X + this.Width;
-            Contour[7].Y = this.Y + this.Height / 2;
 
-            Contour[8].X = this.X + this.Width / 2;
-            Contour[8].Y = this.Y + this.Height;
+            ////////////////
+            //Contour[0].X = this.X;
+            //Contour[0].Y = this.Y;
+            //Contour[1].X = this.X;
+            //Contour[1].Y = this.Y + this.Height;
+            //Contour[2].X = this.X + this.Width;
+            //Contour[2].Y = this.Y;
+            //Contour[3].X = this.X + this.Width;
+            //Contour[3].Y = this.Y + this.Height;
+            /////////////////
+            //Contour[4].X = this.X;
+            //Contour[4].Y = this.Y + this.Height / 2;
+
+            //Contour[5].X = this.X + this.Width / 2;
+            //Contour[5].Y = this.Y;
+
+            //Contour[6].X = this.X + this.Width / 2;
+            //Contour[6].Y = this.Y + this.Height / 2;
+            ////////////
+            //Contour[7].X = this.X + this.Width;
+            //Contour[7].Y = this.Y + this.Height / 2;
+
+            //Contour[8].X = this.X + this.Width / 2;
+            //Contour[8].Y = this.Y + this.Height;
             //    /////////
         }
 
@@ -95,6 +121,7 @@ namespace WindowsFormsApp1
                 }
                 else if (gobj is Bullet)
                 {
+
                     var bullet = gobj as Bullet;
                     HP -= 1;
                     bullet.HP = -1;
@@ -103,7 +130,6 @@ namespace WindowsFormsApp1
                 {
                     var myShip = gobj as MyShip;
                     HP -= 1;
-
                     gobj.HP -= 1;
                 }
                 else if (gobj is EnemyShip)
@@ -112,9 +138,21 @@ namespace WindowsFormsApp1
                     HP -= 1;
                     gobj.HP -= 1;
                 }
+                else if (gobj is Laser)
+                {
+                    var laser = gobj as Laser;
+                    HP -= 1;
+                    //gobj.HP -= 1;
+                }
+
             }
 
             return null;
+        }
+
+        public virtual void Move(int x, int y)
+        {
+            throw new NotImplementedException();
         }
     }
 

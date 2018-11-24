@@ -85,7 +85,13 @@ namespace WindowsFormsApp1
                     switch (gp.enemyType)
                     {
                         case "EnemyShip":
-                            GameObjects.Add(new EnemyShip(gp.x,gp.y));
+                            new EnemyShip(gp.x, gp.y);
+                            break;
+                        case "FirstAidKit":
+                            new FirstAidKit(gp.x, gp.y);
+                            break;
+                        case "PowerUpBullet":
+                            new PowerUpBullet(gp.x, gp.y);
                             break;
                     }
                 }

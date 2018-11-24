@@ -39,7 +39,7 @@ namespace WindowsFormsApp1
         {
             MyShip myship = GameMgr.GameObjects.FirstOrDefault() as MyShip;
 
-            if (CheckCoolDown())
+            if (CheckCoolDown(ShipWeapon))
             {
                 switch (ShipWeapon)
                 {

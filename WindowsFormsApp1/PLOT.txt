@@ -1,5 +1,7 @@
 {
   "Enemies": [
+    {time:15,enemytype:"PowerUpBullet",X:200,Y:400},
+    {time:10,enemytype:"FirstAidKit",X:100,Y:500},
     {time:100,enemytype:"EnemyShip",X:100,Y:100},
     {time:100,enemytype:"EnemyShip",X:150,Y:100},   
     {time:100,enemytype:"EnemyShip",X:200,Y:100},

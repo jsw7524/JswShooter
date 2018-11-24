@@ -20,12 +20,44 @@ namespace WindowsFormsApp1
 
         public Queue<Keys> Instructions;
 
-        public override void DoSomething()
+
+        public override List<GameObject> IsHit()
         {
-            
+            base.IsHit();
+            var ps = GameMgr.GameDataStructure.Search_KD_Tree(GameMgr.KdRoot, TopLeftX, TopLeftY, BottomRightX, BottomRightY);
+
+            bool isDeleted = false;
+
+            foreach (var p in ps)
+            {
+                var gobj = GameMgr.GameObjectDictionary[p];
+                if (gobj == this)
+                {
+                    continue;
+                }
+                else if (gobj is FirstAidKit)
+                {
+                    var firstAaidKit = gobj as FirstAidKit;
+                    HP = 100;
+                    firstAaidKit.HP -= 1;
+                }
+                else if (gobj is PowerUpBullet)
+                {
+                    var powerUpBullet = gobj as PowerUpBullet;
+                    ShipWeapon = "Bullet";
+                    powerUpBullet.HP -= 1;
+                }
+            }
+
+            return null;
+        }
+
+        public override void DoSomething()
+        {        
             base.DoSomething();
             this.IsHit();
             Debug.Print(this.HP.ToString());
+
         }
 
         public void SetXY(int x, int y)
@@ -37,7 +69,7 @@ namespace WindowsFormsApp1
         public override void Shoot()
         {
 
-            if (CheckCoolDown())
+            if (CheckCoolDown(ShipWeapon))
             {
                 switch (ShipWeapon)
                 {

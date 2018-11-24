@@ -11,7 +11,7 @@ namespace WindowsFormsApp1
         public int Ax { get; set; }
         public int Ay { get; set; }
         static public int CoolDownTime { get; set; } = 1;
-        public Laser(int x, int y, int ax, int ay) : base(x, y-200, 5, 190, 10, 1,1)
+        public Laser(int x, int y, int ax, int ay) : base(x, y-200, 5, 190, 10, 10000,1)
         {
             Ax = ax;
             Ay = ay;
@@ -30,24 +30,24 @@ namespace WindowsFormsApp1
             this.Move(Ax, Ay);
             IsHit();
         }
-        public override List<GameObject> IsHit()
-        {
-            var ps = GameMgr.GameDataStructure.Search_KD_Tree(GameMgr.KdRoot, TopLeftX, TopLeftY, BottomRightX, BottomRightY);
+        //public override List<GameObject> IsHit()
+        //{
+        //    var ps = GameMgr.GameDataStructure.Search_KD_Tree(GameMgr.KdRoot, TopLeftX, TopLeftY, BottomRightX, BottomRightY);
 
-            bool isDeleted = false;
+        //    bool isDeleted = false;
 
-            foreach (var p in ps)
-            {
-                var gobj = GameMgr.GameObjectDictionary[p];
-                if (gobj == this)
-                {
-                    continue;
-                }
-                gobj.HP = -1;
-            }
+        //    foreach (var p in ps)
+        //    {
+        //        var gobj = GameMgr.GameObjectDictionary[p];
+        //        if (gobj == this)
+        //        {
+        //            continue;
+        //        }
+        //        gobj.HP = -1;
+        //    }
 
-            return null;
-        }
+        //    return null;
+        //}
 
     }
 }

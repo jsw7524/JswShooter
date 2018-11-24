@@ -6,27 +6,23 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
-    class Brick : VisibleGameObject
+    class PowerUp : VisibleGameObject
     {
-        public Brick(int x, int y) : base(x, y, 5, 5, 0, 10)
+        public PowerUp(int x, int y, int width, int height, int speed, int hp) : base(x, y, width, height, speed, hp)
         {
-
         }
 
         public override void DoSomething()
         {
 
             base.DoSomething();
-            this.IsHit();
             Move(0, 0);
             SetGraph();
-            //Debug.Print(this.HP.ToString());
         }
 
-        public void Move(int x, int y)
+        public override void Move(int x, int y)
         {
             this.Y += 1;
         }
-
     }
 }
