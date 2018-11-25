@@ -53,11 +53,12 @@ namespace WindowsFormsApp1
 
         }
         Pen penAqua = new Pen(Color.Aqua, 5);
-        System.Drawing.Font drawFont = new System.Drawing.Font("Arial", 20);
+        System.Drawing.Font drawFont = new System.Drawing.Font("Arial", 6);
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             MyShip myShip =GameMgr.GameObjects.FirstOrDefault() as MyShip;
-            this.label1.Text = "HP:" + myShip.HP + " Frame:" + GameMgr.OffSetY;
+            label1.Hide();
+            //this.label1.Text = "HP:" + myShip.HP + " Frame:" + GameMgr.OffSetY;
             foreach (var gobj in GameMgr.GameObjects)
             {
                 if (gobj is VisibleGameObject)
@@ -73,12 +74,12 @@ namespace WindowsFormsApp1
                             var ace = gobj as EnemyShipAce;
                             
                             e.Graphics.DrawString("ACE", drawFont, brush, g.X-5, g.BottomRightY);
-                            e.Graphics.DrawString("Left:   "+ ace.distanceLeft, drawFont, brush, g.X - 5, g.BottomRightY+20);
-                            e.Graphics.DrawString("Right: " + ace.distanceRight, drawFont, brush, g.X - 5, g.BottomRightY + 50);
-                            e.Graphics.DrawString("Up:   " + ace.distanceUp, drawFont, brush, g.X - 5, g.BottomRightY + 80);
-                            e.Graphics.DrawString("Down: " + ace.distanceDown, drawFont, brush, g.X - 5, g.BottomRightY + 110);
-                            e.Graphics.DrawString("Rad: " + ace.rad, drawFont, brush, g.X - 5, g.BottomRightY + 140);
-                            e.Graphics.DrawString("Dis: " + ace.measureDistance, drawFont, brush, g.X - 5, g.BottomRightY + 170);
+                            //e.Graphics.DrawString("Left:   "+ ace.distanceLeft, drawFont, brush, g.X - 5, g.BottomRightY+20);
+                            //e.Graphics.DrawString("Right: " + ace.distanceRight, drawFont, brush, g.X - 5, g.BottomRightY + 50);
+                            //e.Graphics.DrawString("Up:   " + ace.distanceUp, drawFont, brush, g.X - 5, g.BottomRightY + 80);
+                            //e.Graphics.DrawString("Down: " + ace.distanceDown, drawFont, brush, g.X - 5, g.BottomRightY + 110);
+                            //e.Graphics.DrawString("Rad: " + ace.rad, drawFont, brush, g.X - 5, g.BottomRightY + 140);
+                            //e.Graphics.DrawString("Dis: " + ace.measureDistance, drawFont, brush, g.X - 5, g.BottomRightY + 170);
                         }
                     }
                     else if (gobj is MyShip)

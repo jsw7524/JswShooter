@@ -56,9 +56,9 @@ namespace WindowsFormsApp1
 
             if (0 == Contour.Count)
             {
-                for (int tx = TopLeftX; tx <= BottomRightX; tx++)
+                for (int tx = TopLeftX; tx <= BottomRightX; tx+=2)
                 {
-                    for (int ty = TopLeftY; ty <= BottomRightY; ty++)
+                    for (int ty = TopLeftY; ty <= BottomRightY; ty += 2)
                     {
                         Contour.Add(new Point(tx, ty));
                     }
@@ -67,9 +67,9 @@ namespace WindowsFormsApp1
             else
             {
                 int ti = 0;
-                for (int tx = TopLeftX; tx <= BottomRightX; tx++)
+                for (int tx = TopLeftX; tx <= BottomRightX; tx += 2)
                 {
-                    for (int ty = TopLeftY; ty <= BottomRightY; ty++)
+                    for (int ty = TopLeftY; ty <= BottomRightY; ty += 2)
                     {
                         Contour[ti].X = tx;
                         Contour[ti].Y = ty;
@@ -119,29 +119,40 @@ namespace WindowsFormsApp1
                 {
                     continue;
                 }
-                else if (gobj is Bullet)
+                else if (gobj is EnemyBullet)
                 {
+                    if (this is EnemyShip || this is EnemyShipAce || this is EnemyBullet)
+                        continue;
 
                     var bullet = gobj as Bullet;
                     HP -= 1;
                     bullet.HP = -1;
                 }
-                else if (gobj is MyShip)
+                else if (gobj is FriendBullet)
                 {
-                    if (this is FriendShip)
-                    {
+                    if (this is MyShip || this is FriendShip)
                         continue;
-                    }
-                    var myShip = gobj as MyShip;
+
+                    var bullet = gobj as Bullet;
                     HP -= 1;
-                    gobj.HP -= 1;
+                    bullet.HP = -1;
                 }
-                else if (gobj is EnemyShip)
-                {
-                    var enemyShip = gobj as EnemyShip;
-                    HP -= 1;
-                    gobj.HP -= 1;
-                }
+                //else if (gobj is MyShip)
+                //{
+                //    if (this is FriendShip)
+                //    {
+                //        continue;
+                //    }
+                //    var myShip = gobj as MyShip;
+                //    HP -= 1;
+                //    gobj.HP -= 1;
+                //}
+                //else if (gobj is EnemyShip)
+                //{
+                //    var enemyShip = gobj as EnemyShip;
+                //    HP -= 1;
+                //    gobj.HP -= 1;
+                //}
                 else if (gobj is Laser)
                 {
                     var laser = gobj as Laser;

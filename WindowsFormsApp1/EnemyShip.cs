@@ -47,7 +47,7 @@ namespace WindowsFormsApp1
                 switch (ShipWeapon)
                 {
                     case "Bullet":
-                        new Bullet(this.X, this.Y+20, (myship.X-this.X)>0?1:-1, (myship.Y-this.Y>0)?1:-1);
+                        new EnemyBullet(this.X, this.Y+20, (myship.X-this.X)>0?1:-1, (myship.Y-this.Y>0)?1:-1);
                         break;
                 }
             }

@@ -8,7 +8,8 @@ namespace WindowsFormsApp1
 {
     class EnemyShipAce: EnemyShip
     {
-        public EnemyShipAce(int x, int y) : base(x, y,100)
+        private double lastRad=-Math.PI;
+        public EnemyShipAce(int x, int y) : base(x, y,5)
         {
         }
         double MeasureDistance(double a, double b)
@@ -36,85 +37,109 @@ namespace WindowsFormsApp1
         public double measureDistance;
         public override void Move(int x, int y)
         {
-            double radarDistance = 1000.00;
+            double radarDistance = 2000.00;
             double[] radar = new double[360];
             var nearbyVisibleGameObjects = GameMgr.GameObjects.OfType<VisibleGameObject>().Where(a =>a!=this).Where(a=> radarDistance > MeasureDistance(X-a.X,Y-a.Y));
 
-            for (double degrees =0; degrees<360; degrees+=1.0)
+            double minDangerousValue = 99999999.0;
+            double minRad = -Math.PI;
+            for (double rad =-Math.PI; rad < Math.PI; rad += Math.PI/16)
             {
                 double dangerousValue = 0.0;
-                foreach(var nearbyVisibleGameObject in nearbyVisibleGameObjects)
+                if (rad == lastRad)
                 {
-                    //var distance=Cosines(Speed, MeasureDistance(X - nearbyVisibleGameObject.X, Y - nearbyVisibleGameObject.Y), (DegreesToRad(degrees)- Math.Atan(((double)Y - nearbyVisibleGameObject.Y)/ ((double)X - nearbyVisibleGameObject.X))));
+                    dangerousValue -= 1.0;
+                }
+                
+                foreach (var nearbyVisibleGameObject in nearbyVisibleGameObjects)
+                {
+                    //var distance = Cosines(Speed, MeasureDistance(X - nearbyVisibleGameObject.X, Y - nearbyVisibleGameObject.Y), (DegreesToRad(degrees) - Math.Atan(((double)Y - nearbyVisibleGameObject.Y) / ((double)X - nearbyVisibleGameObject.X))));
 
-                    distanceLeft = Cosines(Speed, MeasureDistance(X - nearbyVisibleGameObject.X, Y - nearbyVisibleGameObject.Y), 
-                         Math.Atan2(Y-nearbyVisibleGameObject.Y, X-nearbyVisibleGameObject.X ));
+                    //distanceLeft = Cosines(Speed, MeasureDistance(X - nearbyVisibleGameObject.X, Y - nearbyVisibleGameObject.Y),
+                    //     Math.Abs(0 + Math.Atan2(Y - nearbyVisibleGameObject.Y, X - nearbyVisibleGameObject.X)));
 
-                    distanceRight = Cosines(Speed, MeasureDistance(X - nearbyVisibleGameObject.X, Y - nearbyVisibleGameObject.Y),
-                         Math.PI-Math.Atan2(Y - nearbyVisibleGameObject.Y, X - nearbyVisibleGameObject.X) );
-
-                    distanceUp = Cosines(Speed, MeasureDistance(X - nearbyVisibleGameObject.X, Y - nearbyVisibleGameObject.Y),
-                        Math.PI/2-Math.Atan2(Y - nearbyVisibleGameObject.Y, X - nearbyVisibleGameObject.X));
-
-                    distanceDown = Cosines(Speed, MeasureDistance(X - nearbyVisibleGameObject.X, Y - nearbyVisibleGameObject.Y),
-                        +Math.PI / 2 + Math.Atan2(Y - nearbyVisibleGameObject.Y, X - nearbyVisibleGameObject.X));
-
-                    rad= Math.Atan2(Y - nearbyVisibleGameObject.Y, X - nearbyVisibleGameObject.X);
-
-                    measureDistance = MeasureDistance(X - nearbyVisibleGameObject.X, Y - nearbyVisibleGameObject.Y);
+                    //distanceRight = Cosines(Speed, MeasureDistance(X - nearbyVisibleGameObject.X, Y - nearbyVisibleGameObject.Y),
+                    //     Math.Abs(-Math.PI + Math.Atan2(Y - nearbyVisibleGameObject.Y, X - nearbyVisibleGameObject.X)));
 
                     //distanceUp = Cosines(Speed, MeasureDistance(X - nearbyVisibleGameObject.X, Y - nearbyVisibleGameObject.Y),
-                    //    Math.PI - Math.Atan2(Y - nearbyVisibleGameObject.Y, X - nearbyVisibleGameObject.X));
+                    //    Math.Abs(-Math.PI / 2 + Math.Atan2(Y - nearbyVisibleGameObject.Y, X - nearbyVisibleGameObject.X)));
 
-                    //if (nearbyVisibleGameObject is EnemyShip)
-                    //{
-                    //    dangerousValue += (radarDistance / distance) * 1;
-                    //}
-                    //else if (nearbyVisibleGameObject is Bullet)
-                    //{
-                    //    dangerousValue += (radarDistance / distance) * 2;
-                    //}
-                    //else if (nearbyVisibleGameObject is Brick)
-                    //{
-                    //    dangerousValue += (radarDistance / distance) * 0.01;
-                    //}
-                    //if (nearbyVisibleGameObject is Laser)
-                    //{
-                    //    dangerousValue += (radarDistance / distance) * 100;
-                    //}
-                    //if (nearbyVisibleGameObject is MyShip)
-                    //{
-                    //    dangerousValue = (radarDistance * 100.00 / distance);
-                    //}
+                    //distanceDown = Cosines(Speed, MeasureDistance(X - nearbyVisibleGameObject.X, Y - nearbyVisibleGameObject.Y),
+                    //    Math.Abs(+Math.PI / 2 + Math.Atan2(Y - nearbyVisibleGameObject.Y, X - nearbyVisibleGameObject.X)));
+
+                    //rad = Math.Atan2(Y - nearbyVisibleGameObject.Y, X - nearbyVisibleGameObject.X);
+
+                    //measureDistance = MeasureDistance(X - nearbyVisibleGameObject.X, Y - nearbyVisibleGameObject.Y);
+
+                    var distance = Cosines(Speed, MeasureDistance(X - nearbyVisibleGameObject.X, Y - nearbyVisibleGameObject.Y),
+                         Math.Abs(rad + Math.Atan2(Y - nearbyVisibleGameObject.Y, X - nearbyVisibleGameObject.X)));
+
+                    if (nearbyVisibleGameObject is EnemyShip)
+                    {
+                        dangerousValue += (radarDistance / distance) * 1;
+                    }
+                    else if (nearbyVisibleGameObject is FriendBullet)
+                    {
+                        dangerousValue += (radarDistance / distance) * 2;
+                    }
+                    else if (nearbyVisibleGameObject is Brick)
+                    {
+                        //dangerousValue += (radarDistance / distance) * 0.2;
+                        dangerousValue += Math.Pow(2, 60.0 / distance) * 1;
+                    }
+                    if (nearbyVisibleGameObject is Laser)
+                    {
+                        dangerousValue += (radarDistance / distance) * 100;
+                    }
+                    if (nearbyVisibleGameObject is MyShip)
+                    {
+                        dangerousValue = (radarDistance / distance) * -150;
+                    }
                 }
-                radar[(int)degrees] = dangerousValue;
-            }
-            //////////////////
-            double min = radar[45];
-            double minIndex = 45;
-            for (int i=0;i<360;i++)
-            {
-                if (min > radar[i])
+                if (minDangerousValue > dangerousValue)
                 {
-                    min = radar[i];
-                    minIndex = i;
+                    minDangerousValue = dangerousValue;
+                    minRad = rad;
                 }
             }
-            ////////////////////
             
-            //this.X += (int)(Speed * Math.Cos(DegreesToRad(minIndex)));
-            //this.Y += (int)(Speed * Math.Sin(DegreesToRad(minIndex)));
+            this.X += -1*(int)(Speed * Math.Cos(minRad));
+            this.Y += (int)(Speed * Math.Sin(minRad));
+            lastRad = minRad;
+            //if (this.X <= 0)
+            //{
+            //    this.X = 1;
+            //}
+            //if (this.X >= 1920)
+            //{
+            //    this.X = 1919;
+            //}
+            //if (this.Y <= 0)
+            //{
+            //    this.Y = 1;
+            //}
+            //if (this.Y >= 1080)
+            //{
+            //    this.Y = 1079;
+            //}
+
             SetGraph();
         }
 
-        public override void DoSomething()
+        public override void Shoot()
         {
-            //base.DoSomething();
-            //this.IsHit();
+            MyShip myship = GameMgr.GameObjects.FirstOrDefault() as MyShip;
 
-            Move(0, 0);
+            if (CheckCoolDown(ShipWeapon))
+            {
 
-            //Shoot();
+                switch (ShipWeapon)
+                {
+                    case "Bullet":
+                        new EnemyBullet(this.X, this.Y + 20, Convert.ToInt32(-1 * 2 * Math.Cos(lastRad)), Convert.ToInt32(2* Math.Sin(lastRad)) );
+                        break;
+                }
+            }
 
         }
     }

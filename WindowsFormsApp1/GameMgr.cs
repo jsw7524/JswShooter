@@ -56,35 +56,35 @@ namespace WindowsFormsApp1
 
             MyShip myShip = new MyShip(300, 300);
 
-            //new FriendShip(myShip.X, myShip.Y, 0);
-            //new FriendShip(myShip.X, myShip.Y, 1 * 2 * Math.PI / 12);
-            //new FriendShip(myShip.X, myShip.Y, 2 * 2 * Math.PI / 12);
-            //new FriendShip(myShip.X, myShip.Y, 3 * 2 * Math.PI / 12);
-            //new FriendShip(myShip.X, myShip.Y, 4 * 2 * Math.PI / 12);
-            //new FriendShip(myShip.X, myShip.Y, 5 * 2 * Math.PI / 12);
+            new FriendShip(myShip.X, myShip.Y, 0);
+            new FriendShip(myShip.X, myShip.Y, 1 * 2 * Math.PI / 12);
+            new FriendShip(myShip.X, myShip.Y, 2 * 2 * Math.PI / 12);
+            new FriendShip(myShip.X, myShip.Y, 3 * 2 * Math.PI / 12);
+            new FriendShip(myShip.X, myShip.Y, 4 * 2 * Math.PI / 12);
+            new FriendShip(myShip.X, myShip.Y, 5 * 2 * Math.PI / 12);
 
-            //new FriendShip(myShip.X, myShip.Y, 6 * 2 * Math.PI / 12);
-            //new FriendShip(myShip.X, myShip.Y, 7 * 2 * Math.PI / 12);
-            //new FriendShip(myShip.X, myShip.Y, 8 * 2 * Math.PI / 12);
-            //new FriendShip(myShip.X, myShip.Y, 9 * 2 * Math.PI / 12);
-            //new FriendShip(myShip.X, myShip.Y, 10 * 2 * Math.PI / 12);
-            //new FriendShip(myShip.X, myShip.Y, 11 * 2 * Math.PI / 12);
+            new FriendShip(myShip.X, myShip.Y, 6 * 2 * Math.PI / 12);
+            new FriendShip(myShip.X, myShip.Y, 7 * 2 * Math.PI / 12);
+            new FriendShip(myShip.X, myShip.Y, 8 * 2 * Math.PI / 12);
+            new FriendShip(myShip.X, myShip.Y, 9 * 2 * Math.PI / 12);
+            new FriendShip(myShip.X, myShip.Y, 10 * 2 * Math.PI / 12);
+            new FriendShip(myShip.X, myShip.Y, 11 * 2 * Math.PI / 12);
 
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    for (int j = 0; j < 1; j++)
-            //    {
-            //        EnemyShip enemyShip1 = new EnemyShip(i * 30 + 300, j * 30 + 100);
-            //    }
-            //}
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 1; j++)
+                {
+                    EnemyShip enemyShip1 = new EnemyShip(i * 30 + 300, j * 30 + 100);
+                }
+            }
 
-            //for (int i = 0; i < 50; i++)
-            //{
-            //    for (int j = 0; j < 5; j++)
-            //    {
-            //        Brick brick = new Brick(i * 5 + 200, j * 5 + 200);
-            //    }
-            //}
+            for (int i = 0; i < 30; i++)
+            {
+                for (int j = 0; j < 1; j++)
+                {
+                    Brick brick = new Brick(i * 5 + 200, j * 5 + 200);
+                }
+            }
 
         }
 

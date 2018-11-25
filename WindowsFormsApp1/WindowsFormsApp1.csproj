@@ -54,6 +54,7 @@
     <Compile Include="Brick.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="DataStructure.cs" />
+    <Compile Include="EnemyBullet.cs" />
     <Compile Include="EnemyShip.cs" />
     <Compile Include="EnemyShipAce.cs" />
     <Compile Include="FirstAaidKit.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FriendBullet.cs" />
     <Compile Include="FriendShip.cs" />
     <Compile Include="GameMgr.cs" />
     <Compile Include="GameObject.cs" />

@@ -1,5 +1,18 @@
 {
   "Enemies": [
-    {time:20,enemytype:"EnemyShipAce",X:375,Y:300}
+    {time:15,enemytype:"PowerUpBullet",X:200,Y:400},
+    {time:10,enemytype:"FirstAidKit",X:100,Y:500},
+    {time:100,enemytype:"EnemyShipAce",X:100,Y:100},
+    {time:100,enemytype:"EnemyShipAce",X:150,Y:100},   
+    {time:100,enemytype:"EnemyShipAce",X:200,Y:100},
+    {time:150,enemytype:"EnemyShipAce",X:250,Y:100},
+    {time:150,enemytype:"EnemyShipAce",X:300,Y:100},
+    {time:100,enemytype:"EnemyShipAce",X:100,Y:100},
+    {time:200,enemytype:"EnemyShipAce",X:150,Y:100},   
+    {time:300,enemytype:"EnemyShipAce",X:200,Y:100},
+    {time:300,enemytype:"EnemyShipAce",X:100,Y:100},
+    {time:200,enemytype:"EnemyShipAce",X:150,Y:100},   
+    {time:200,enemytype:"EnemyShipAce",X:200,Y:100},
+    {time:50,enemytype:"EnemyShipAce",X:575,Y:500}
   ]
 }
