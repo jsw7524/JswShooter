@@ -23,7 +23,10 @@ namespace WindowsFormsApp1
         {
 
         }
+        public EnemyShip(int x, int y,int speed) : base(x, y, 10, 10, speed, 3, 1, "Bullet")
+        {
 
+        }
         public override void DoSomething()
         {
             base.DoSomething();

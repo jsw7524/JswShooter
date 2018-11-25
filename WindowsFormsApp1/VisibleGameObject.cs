@@ -138,7 +138,6 @@ namespace WindowsFormsApp1
                 }
                 else if (gobj is EnemyShip)
                 {
-
                     var enemyShip = gobj as EnemyShip;
                     HP -= 1;
                     gobj.HP -= 1;

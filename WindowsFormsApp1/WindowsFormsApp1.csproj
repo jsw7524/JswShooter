@@ -55,6 +55,7 @@
     <Compile Include="Bullet.cs" />
     <Compile Include="DataStructure.cs" />
     <Compile Include="EnemyShip.cs" />
+    <Compile Include="EnemyShipAce.cs" />
     <Compile Include="FirstAaidKit.cs" />
     <Compile Include="FloatingObject.cs" />
     <Compile Include="Form1.cs">

@@ -55,7 +55,7 @@ namespace WindowsFormsApp1
         public override void DoSomething()
         {        
             base.DoSomething();
-            this.IsHit();
+            //this.IsHit();
             Debug.Print(this.HP.ToString());
 
         }

@@ -11,7 +11,7 @@ namespace WindowsFormsApp1
 
         public int Ax{ get; set; }
         public int Ay { get; set; }
-        static public int CoolDownTime { get; set; } = 3;
+        static public int CoolDownTime { get; set; } = 15;
         public Bullet(int x, int y, int ax, int ay) : base(x, y, 5, 5, 4, 1, 3)
         {
             Ax = ax;
