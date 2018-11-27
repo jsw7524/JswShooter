@@ -57,8 +57,8 @@ namespace WindowsFormsApp1
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             MyShip myShip =GameMgr.GameObjects.FirstOrDefault() as MyShip;
-            label1.Hide();
-            //this.label1.Text = "HP:" + myShip.HP + " Frame:" + GameMgr.OffSetY;
+            //label1.Hide();
+            this.label1.Text = "HP:" + myShip.HP + " Frame:" + GameMgr.OffSetY;
             foreach (var gobj in GameMgr.GameObjects)
             {
                 if (gobj is VisibleGameObject)
@@ -86,7 +86,7 @@ namespace WindowsFormsApp1
                     {
                         brush = Brushes.Blue;            
                     }
-                    else if (gobj is Bullet)
+                    else if (gobj is EnemyBullet)
                     {
                         brush = Brushes.Gold;
                     }
@@ -102,9 +102,17 @@ namespace WindowsFormsApp1
                     {
                         brush = Brushes.Goldenrod;
                     }
-                    else if (gobj is FriendShip)
+                    else if (gobj is SheildShip)
                     {
                         brush = Brushes.DeepSkyBlue;
+                    }
+                    else if (gobj is FriendShip)
+                    {
+                        brush = Brushes.CornflowerBlue;
+                    }
+                    else if (gobj is FriendBullet)
+                    {
+                        brush = Brushes.CornflowerBlue;
                     }
                     else if (gobj is Laser)
                     {

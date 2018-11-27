@@ -130,23 +130,23 @@ namespace WindowsFormsApp1
                 }
                 else if (gobj is FriendBullet)
                 {
-                    if (this is MyShip || this is FriendShip)
+                    if (this is MyShip || this is SheildShip || this is FriendShip)
                         continue;
 
                     var bullet = gobj as Bullet;
                     HP -= 1;
                     bullet.HP = -1;
                 }
-                //else if (gobj is MyShip)
-                //{
-                //    if (this is FriendShip)
-                //    {
-                //        continue;
-                //    }
-                //    var myShip = gobj as MyShip;
-                //    HP -= 1;
-                //    gobj.HP -= 1;
-                //}
+                else if (gobj is MyShip)
+                {
+                    if (this is FriendShip)
+                    {
+                        continue;
+                    }
+                    var myShip = gobj as MyShip;
+                    HP -= 1;
+                    gobj.HP -= 1;
+                }
                 //else if (gobj is EnemyShip)
                 //{
                 //    var enemyShip = gobj as EnemyShip;

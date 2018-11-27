@@ -67,6 +67,7 @@
     </Compile>
     <Compile Include="FriendBullet.cs" />
     <Compile Include="FriendShip.cs" />
+    <Compile Include="SheildShip.cs" />
     <Compile Include="GameMgr.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="IMovable.cs" />

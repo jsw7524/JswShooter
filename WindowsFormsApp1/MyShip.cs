@@ -11,7 +11,7 @@ namespace WindowsFormsApp1
     class MyShip : Ship
     {
 
-        public MyShip(int x, int y) : base(x,y,10,10,3,3,10000, "Laser")
+        public MyShip(int x, int y) : base(x,y,10,10,3,3,10000, "Bullet")
         {
             
 
